@@ -22,6 +22,14 @@ function generateStorage(storage) {
     },
 
     /**
+     * 是否存在指定的key
+     * @param {string} key
+     */
+    isExist(key) {
+      return storage.hasOwnProperty(key);
+    },
+
+    /**
      * 获取相应key的值
      * @param {string} key
      */
@@ -35,7 +43,7 @@ function generateStorage(storage) {
      * @param {any} value
      */
     setItem(key, value) {
-      if (storage.hasOwnProperty(key)) {
+      if (this.isExist(key)) {
         throw new Error('此记录已经存在，如果您确认需要修改此记录，请用updateItem(key)修改！');
       } else {
         try {
@@ -52,7 +60,7 @@ function generateStorage(storage) {
      * @param {any} value
      */
     updateItem(key, value) {
-      if (storage.hasOwnProperty(key)) {
+      if (this.isExist(key)) {
         this.setItem(key, value);
       } else {
         throw new Error('不存在此记录');
